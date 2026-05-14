@@ -3,6 +3,7 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
+<<<<<<< HEAD
     "keywords": [
         "laravel",
         "framework"
@@ -12,16 +13,45 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
+=======
+    "keywords": ["laravel", "framework"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "filament/filament": "^4.0",
+        "intervention/image": "^4.0",
+        "laravel/framework": "^13.7",
+        "laravel/scout": "^11.1",
+        "laravel/tinker": "^3.0",
+        "league/commonmark": "^2.8",
+        "livewire/livewire": "^3.6.4",
+        "livewire/volt": "^1.7.0",
+        "meilisearch/meilisearch-php": "^1.16",
+        "spatie/laravel-activitylog": "^4.12",
+        "spatie/laravel-medialibrary": "^11.22",
+        "spatie/laravel-permission": "^7.4",
+        "spatie/laravel-tags": "^4.11",
+        "spatie/shiki-php": "^2.4"
+>>>>>>> master
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.4",
+<<<<<<< HEAD
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^4.4",
+=======
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.7",
+>>>>>>> master
         "pestphp/pest-plugin-laravel": "^4.1"
     },
     "autoload": {
@@ -42,7 +72,11 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
+<<<<<<< HEAD
             "npm install",
+=======
+            "npm install --ignore-scripts",
+>>>>>>> master
             "npm run build"
         ],
         "dev": [
@@ -50,12 +84,21 @@
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
         ],
         "test": [
+<<<<<<< HEAD
             "@php artisan config:clear --ansi",
+=======
+            "@php artisan config:clear --ansi @no_additional_args",
+>>>>>>> master
             "@php artisan test"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+<<<<<<< HEAD
             "@php artisan package:discover --ansi"
+=======
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
+>>>>>>> master
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

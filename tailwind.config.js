@@ -17,5 +17,12 @@ export default {
         },
     },
 
+<<<<<<< HEAD
     plugins: [forms],
+=======
+    plugins: [
+        forms,
+        require('@tailwindcss/typography'),
+    ],
+>>>>>>> master
 };

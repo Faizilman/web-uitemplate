@@ -14,4 +14,8 @@ class DocsLayout extends Component
     {
         return view('layouts.docs');
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
