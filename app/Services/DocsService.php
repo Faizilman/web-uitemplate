@@ -2,7 +2,11 @@
 
 namespace App\Services;
 
-use League\CommonMark\CommonMarkConverter;
+use Illuminate\Support\Str;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Attributes\AttributesExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
 
 class DocsService
 {
@@ -13,7 +17,7 @@ class DocsService
     | Markdown Path
     |--------------------------------------------------------------------------
     */
-        $path = resource_path("docs/v1/{$page}.md");
+        $path = resource_path("docs/1.x/{$page}.md");
 
         abort_unless(
             file_exists($path),
@@ -35,10 +39,39 @@ class DocsService
         |--------------------------------------------------------------------------
         */
 
-        $converter =
-            new CommonMarkConverter;
+        $config = [
+            'attributes' => [
+                'allow' => ['id', 'class', 'align'],
+            ],
+        ];
 
-        return $converter->convert($markdown);
+        $environment = new Environment($config);
+        $environment->addExtension(new CommonMarkCoreExtension);
+
+        // Add this extension
+        $environment->addExtension(new AttributesExtension);
+
+        $converter = new MarkdownConverter($environment);
+
+        $result = $converter->convert($markdown);
+
+        preg_match_all(
+            '/<h2>(.*?)<\/h2>/',
+            $result,
+            $matches
+        );
+
+        foreach ($matches[1] as $heading) {
+            $slug = Str::slug($heading);
+
+            $result = str_replace(
+                "<h2>{$heading}</h2>",
+                "<h2 id=\"{$slug}\">{$heading}</h2>",
+                $result
+            );
+        }
+
+        return $result;
 
     }
 
@@ -47,23 +80,29 @@ class DocsService
      | Parse :::demo
      |--------------------------------------------------------------------------
      */
-    public static function parseDemoTags($html, string $folder, string $page)
+    public static function parseDemoTags($html, string $folder)
     {
 
         return preg_replace_callback(
 
-            '/<p>\[\[demo\:(.*?)\]\]<\/p>/',
+            '/<p>\[\[(.*?):(.*?)\{(.*?)\}\]\]<\/p>/',
 
-            function ($matches) use ($folder, $page) {
+            function ($matches) use ($folder) {
 
-                $component =
+                $page =
                  trim($matches[1]);
 
-                $page = 'docs.components.'.$page;
+                $component =
+                 trim($matches[2]);
+
+                $nameFile =
+                 trim($matches[3]);
+
+                $page = 'docs.partials.'.$page;
 
                 return view(
-                    "{$page}",
-                    compact(['component', 'folder']),
+                    "$page",
+                    compact(['component', 'folder', 'nameFile']),
                 )->render();
 
             },

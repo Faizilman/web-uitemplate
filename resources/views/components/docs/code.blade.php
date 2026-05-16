@@ -21,8 +21,6 @@
     }
 
 }" class="relative">
-
-    {{-- Copy Button --}}
     <button @click="copy"
         class="
             absolute
@@ -44,6 +42,8 @@
         </span>
 
     </button>
+    {{-- Copy Button --}}
+
 
     {{-- Code --}}
     <pre class="

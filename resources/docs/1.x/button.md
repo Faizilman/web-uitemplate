@@ -4,7 +4,7 @@ Basic button component.
 
 ## Preview
 
-[[demo:button]]
+[[demo:button{button}]]
 
 ## Installation
 
@@ -13,5 +13,7 @@ php artisan ui:add button
 ```
 
 ## Usage
+
+[[demo:button{button-variant}]]
 
 Use buttons for actions.

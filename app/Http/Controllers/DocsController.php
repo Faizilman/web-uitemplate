@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\DocsService;
+use App\Support\Docs\TocGenerator;
 
 class DocsController extends Controller
 {
@@ -15,12 +16,31 @@ class DocsController extends Controller
 
         $html = $this->docsService->markDownToHtml($page);
 
-        $html = $this->docsService->parseDemoTags($html, $folder, 'demo');
+        $toc = TocGenerator::make($html);
+        $html = $this->docsService->parseDemoTags($html, $folder);
 
         return view(
             'layouts.docs',
             [
-                'title' => "Component - {$page}",
+                'page' => "{$page}",
+                'content' => $html,
+                'toc' => $toc,
+            ]
+        );
+
+    }
+
+    public function showCopyCode($folder, $page)
+    {
+
+        $html = $this->docsService->markDownToHtml($page);
+
+        $html = $this->docsService->parseDemoTags($html, $folder, 'copy-code');
+
+        return view(
+            'layouts.docs',
+            [
+                'title' => "{$page} UI template",
                 'content' => $html,
             ]
         );

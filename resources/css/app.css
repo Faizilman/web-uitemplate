@@ -1,8 +1,5 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-<<<<<<< HEAD
-=======
 
 @plugin "@tailwindcss/typography";
->>>>>>> master

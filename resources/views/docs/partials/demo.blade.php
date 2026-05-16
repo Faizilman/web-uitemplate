@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-    $preview = "docs.examples.{$component}";
+    $preview = "docs.ui.{$component}.{$nameFile}";
 
     /*
 |--------------------------------------------------------------------------
@@ -14,9 +14,9 @@
 |--------------------------------------------------------------------------
 */
 
-    $bladePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$component}.blade.php");
+    $bladePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.blade.php");
 
-    $vuePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$component}.vue");
+    $vuePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.vue");
 
     /*
 |--------------------------------------------------------------------------
@@ -36,28 +36,11 @@
 
 @endphp
 
-<div class="
-        border
-        rounded-2xl
-        overflow-hidden
-        my-8
-    ">
+<div class="w-full max-w-4xl mx-auto mt-10 border border-slate-700 rounded-xl overflow-hidden bg-[#010101] shadow-2xl">
 
-
-
-    {{-- Preview --}}
-    <div class="
-            p-8
-            border-b
-            bg-white
-            dark:bg-zinc-950
-        ">
-
+    <div class="p-12 flex justify-center items-center bg-center border-b border-slate-700">
         @include($preview)
     </div>
 
     <x-docs.tabs :tabs="$tabs" />
-
-
-
 </div>
