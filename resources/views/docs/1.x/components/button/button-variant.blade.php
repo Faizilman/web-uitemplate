@@ -1,3 +1,3 @@
 <x-ui.button variant="outline">
-Default Button
+    Default Button
 </x-ui.button>

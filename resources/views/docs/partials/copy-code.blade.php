@@ -1,21 +1,8 @@
 @php
 
-    /*
-|--------------------------------------------------------------------------
-| Preview View
-|--------------------------------------------------------------------------
-*/
+    $codePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.blade.php");
 
-    $preview = "docs.ui.{$component}";
-
-    /*
-|--------------------------------------------------------------------------
-| Source Paths
-|--------------------------------------------------------------------------
-*/
-
-    $bladePath = resource_path("views/docs/v1/{$component}/{$component}.blade.php");
-
+    $code = file_get_contents($codePath);
 @endphp
 <div class="relative group">
     <div
@@ -41,7 +28,15 @@
             </div>
         </div>
         <div x-ref="code">
-            {{ $slot }}
+            <pre
+                class="
+            overflow-x-auto
+            px-5
+            pt-2
+            text-sm
+            mb-0
+            bg-black
+        "><code class="language-html">{{ $code }}</code></pre>
         </div>
 
     </div>

@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\MarkdownConverter;
 
 class DocsService
@@ -39,6 +40,7 @@ class DocsService
         |--------------------------------------------------------------------------
         */
 
+        // Define your configuration, if needed
         $config = [
             'attributes' => [
                 'allow' => ['id', 'class', 'align'],
@@ -47,6 +49,7 @@ class DocsService
 
         $environment = new Environment($config);
         $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new TableExtension);
 
         // Add this extension
         $environment->addExtension(new AttributesExtension);
@@ -56,7 +59,7 @@ class DocsService
         $result = $converter->convert($markdown);
 
         preg_match_all(
-            '/<h2>(.*?)<\/h2>/',
+            '/<h3>(.*?)<\/h3>/',
             $result,
             $matches
         );
@@ -65,8 +68,8 @@ class DocsService
             $slug = Str::slug($heading);
 
             $result = str_replace(
-                "<h2>{$heading}</h2>",
-                "<h2 id=\"{$slug}\">{$heading}</h2>",
+                "<h3>{$heading}</h3>",
+                "<h3 id=\"{$slug}\">{$heading}</h3>",
                 $result
             );
         }

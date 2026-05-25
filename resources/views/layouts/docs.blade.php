@@ -8,6 +8,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-blade@0.1.0/dist/blade.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+
+
     <title>{{ 'UiTemplate -' . $page ?? 'UI Elegant UiTemplate for Building Website' }}</title>
     <style>
         html {
@@ -57,6 +64,62 @@
             color: #3b82f6;
             font-weight: 600;
             border-bottom: 2px solid #3b82f6;
+        }
+
+        pre code {
+            font-family:
+                'JetBrains Mono',
+                monospace;
+
+            tab-size: 4;
+
+        }
+
+        /* for block of numbers */
+
+
+        .hljs-ln-numbers {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            color: #98a1b1;
+        }
+
+        /* for block of code */
+
+        .language-html .hljs-ln-n:before {
+            display: block;
+            content: attr(data-line-number)"   ";
+        }
+
+        .hljs-ln {
+            margin: 0px;
+        }
+
+        .hljs-ln tbody tr {
+            border: none !important;
+            border-bottom: none !important;
+        }
+
+        table thead tr th {
+            padding: 10px 2px;
+        }
+
+        table thead tr {
+            background-color: oklch(27.4% 0.006 286.033);
+        }
+
+        table thead tr th:first-child {
+            border-radius: 5px 0 0 5px;
+            padding-left: 4px;
+        }
+
+        table thead tr th:last-child {
+            border-radius: 0 5px 5px 0;
         }
     </style>
 </head>
@@ -149,22 +212,29 @@
                     </div>
                 </footer>
             </main>
-            <aside class="hidden xl:block w-64 flex-none py-12 sticky top-16 h-fit border-l border-slate-800/40 pl-8">
-                <div>
-                    <h5 class="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-8">On this page</h5>
-                    <nav class="space-y-5 text-[13px] font-medium border-l border-slate-800">
-                        {{-- <x-docs.aside-right page="{{ $page }}" /> --}}
-                        @foreach ($toc as $t)
-                            <a href="#{{ $t['slug'] }}" data-fragment="{{ $t['slug'] }}"
-                                class="block pl-4 -ml-px transition-all @if (request()->is(request()->path() . '#' . $t['slug'])) text-blue-400 border-l-2 border-blue-500 @endif">{{ $t['title'] }}</a>
-                        @endforeach
-
-                    </nav>
+            <aside
+                class="hidden xl:block w-64 flex-none py-12 sticky top-16 h-fit border-l border-slate-800/40 pl-8 mb-10">
+                <div class="grid gap-y-4">
+                    <div>
+                        <h5 class="text-[11px] font-bold text-white uppercase tracking-[0.2em] mb-8">On this page</h5>
+                        <nav class="space-y-5 text-[13px] font-medium border-l border-slate-800 h-64 overflow-y-auto">
+                            @foreach ($toc as $t)
+                                <a href="#{{ $t['slug'] }}" data-fragment="{{ $t['slug'] }}" id="asideRight"
+                                    class="block pl-4 -ml-px transition-all @if (request()->is(request()->path() . '#' . $t['slug'])) text-blue-400 border-l-2 border-blue-500 @endif">{{ $t['title'] }}</a>
+                            @endforeach
+                        </nav>
+                    </div>
+                    <div>
+                        Isian Baruu nanti
+                    </div>
                 </div>
             </aside>
         </div>
     </div>
     <script>
+        hljs.highlightAll();
+        hljs.initLineNumbersOnLoad();
+
         const hamburger = document.querySelector('#hamburger');
         const aside = document.querySelector('#aside');
 

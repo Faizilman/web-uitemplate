@@ -1,7 +1,7 @@
 @props(['tabs'])
 <div x-data="{
     tab: '{{ array_key_first($tabs) }}'
-}">
+}" class="relative">
 
 
     {{-- Header --}}
@@ -19,9 +19,9 @@
     @foreach ($tabs as $name => $code)
         <div x-show="
                 tab === '{{ $name }}'
-            ">
+            " class="">
 
-            <x-docs.code :code="$code" />
+            <x-docs.code :code="$code" :tab="$name" />
 
         </div>
     @endforeach
