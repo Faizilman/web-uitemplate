@@ -38,16 +38,6 @@ warning
 error
 ```
 
-Example:
-
-```blade
-<x-ui.button variant="primary">
-
-    Submit
-
-</x-ui.button>
-```
-
 ---
 
 ### Sizes
@@ -62,15 +52,6 @@ Show loading indicator.
 
 [[demo:button{button-icon-only}]]
 
-```blade
-<x-ui.button
-    :isPending="true">
-
-    Save
-
-</x-ui.button>
-```
-
 Result:
 
 ```txt
@@ -82,16 +63,8 @@ Result:
 
 Show loading indicator.
 
-[[demo:button{button-icon-only}]]
+[[demo:button{button-with-icon}]]
 
-```blade
-<x-ui.button
-    :isPending="true">
-
-    Save
-
-</x-ui.button>
-```
 
 Result:
 
@@ -101,20 +74,13 @@ Result:
 
 ---
 
-### Loading State
+### Loading
 
 Show loading indicator.
 
 [[demo:button{button-loading}]]
 
-```blade
-<x-ui.button
-    :isPending="true">
-
-    Save
-
-</x-ui.button>
-```
+#### Loading State
 
 Result:
 
@@ -174,6 +140,11 @@ variant="primary"
 
 </x-ui.button>
 ```
+---
+
+### As Link
+
+[[demo:button{button-href}]]
 
 ---
 

@@ -8,13 +8,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/highlightjs-blade@0.1.0/dist/blade.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
-
-
     <title>{{ 'UiTemplate -' . $page ?? 'UI Elegant UiTemplate for Building Website' }}</title>
     <style>
         html {
@@ -47,7 +43,7 @@
         }
 
         .glass-nav {
-            background: rgba(2, 6, 23, 0.7);
+            background: #020202;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
@@ -76,6 +72,9 @@
         }
 
         /* for block of numbers */
+        .language-html .hljs-ln-n::before {
+            content: attr(data-line-number)"  ";
+        }
 
 
         .hljs-ln-numbers {
@@ -87,14 +86,16 @@
             user-select: none;
 
             color: #98a1b1;
+            border-right: 1px solid #1e293b;
+            padding-right: 12px !important;
+            text-align: right;
+        }
+
+        .hljs-ln-code{
+            padding-left: 12px !important;
         }
 
         /* for block of code */
-
-        .language-html .hljs-ln-n:before {
-            display: block;
-            content: attr(data-line-number)"   ";
-        }
 
         .hljs-ln {
             margin: 0px;
@@ -103,6 +104,13 @@
         .hljs-ln tbody tr {
             border: none !important;
             border-bottom: none !important;
+        }
+
+        table.hljs-ln {
+            width: 9%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin: 0;
         }
 
         table thead tr th {
@@ -124,9 +132,9 @@
     </style>
 </head>
 
-<body class="">
+<body class="bg-black">
 
-    <header class="sticky top-0 z-50 w-full glass-nav border-b border-slate-800/50">
+    <header class="sticky top-0 z-50 w-full z-[999] glass-nav border-b border-slate-800/50">
         <div class="max-w-[1536px] mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="text-3xl block lg:hidden" id="hamburger">
@@ -155,12 +163,34 @@
             </div>
         </div>
     </header>
+<div x-data="{isPending: false, isDisabled: false}">
 
-    <div class="max-w-[1536px] mx-auto px-6">
+    <x-ui.component.button variant="warning" size="md" @click="
+        isPending = true;
+
+        setTimeout(() => {
+            isPending = false
+        }, 2000)
+    ">
+    <x-slot:pending>
+        <span class="sr-only">
+            Loading...
+        </span>
+        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-20" />
+            <path fill="currentColor" class="opacity-80" d="M12 2a10 10 0 0 1 10 10" />
+        </svg>
+        Loading...
+    </x-slot:pending>
+    klik
+</x-ui.component.button>
+</div>
+
+    <div class="max-w-[1536px] mx-auto px-6 ">
         <div class="flex flex-col lg:flex-row gap-0">
 
             <aside
-                class="fixed top-0 bottom-0 lg:sticky z-10 -translate-x-[100%] lg:-translate-x-0 transition-all lg:block w-64 flex-none py-12 lg:top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-slate-800/40 bg-black"
+                class="fixed top-0 bottom-0 lg:sticky z-10 -translate-x-[100%] lg:-translate-x-0 transition-all lg:block w-64 flex-none py-12 lg:top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-slate-800/40 "
                 id="aside">
                 <nav class="space-y-9 pr-6">
                     <div>

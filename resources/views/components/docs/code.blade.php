@@ -4,54 +4,38 @@
     expandCode: false,
     copied: false,
     copy() {
-
         navigator.clipboard.writeText(
             @js($code)
         );
-
         this.copied = true;
-
         setTimeout(() => {
-
             this.copied = false;
-
         }, 2000);
-
     }
 
 }" class="">
     <button @click="copy"
-        class="
-            absolute
-            top-0
-            right-3
-            text-xs
-            border
-            border-slate-500
-            rounded
-            px-2
-            py-1
-            mt-1.5
-        ">
-
-
+        class="absolute top-0 right-3 text-xs border border-slate-500 hover:border-slate-300 rounded px-2 py-1 mt-1.5 group">
         <span x-show="! copied">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-5 stroke-slate-500">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
+           <svg class="w-4 h-4 text-slate-500 group-hover:text-slate-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
         </span>
 
         <span x-show="copied">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-5 stroke-slate-500">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+            <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
         </span>
         <span
             class="border border-slate-500 text-[10px] bg-black px-3 py-1.5 rounded-md text-slate-500 hover:text-white uppercase tracking-wider font-bold absolute z-[999] -top-10 -left-5"
-            x-show="copied">
+            x-show="copied"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95 translate-y-1"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="opacity-0 scale-95 translate-y-1">
             Copied
         </span>
 
@@ -61,16 +45,19 @@
 
     {{-- Code --}}
     <div class="relative">
-        <pre :class="expandCode ? 'h-auto' : 'h-20'" class="overflow-x-auto px-5 text-sm mb-2 bg-black"><code class="language-{{ $tab }} text-sm">{{ $code }}</code></pre>
+        <pre :class="expandCode ? 'h-auto' : 'h-24'" class="px-5 text-sm mb-2 bg-black"><code class="language-html text-sm">{{ $code }}</code></pre>
         <div class="flex justify-center items-end w-full">
             <button
-                class="inline-flex items-center justify-center gap-x-1 font-medium transition-all duration-200 active:scale-[0.98] focus:outline-none focus-visible:ring-4 bg-blue-700 text-white hover:bg-blue-800 focus-visible:ring-blue-300 shadow-sm dark:bg-blue-500 dark:hover:bg-blue-600 h-9 px-4 text-sm rounded-2xl absolute z-[999] -bottom-5"
+                class="inline-flex items-center gap-x-1 px-3.5 py-1.5 text-xs font-medium text-slate-300 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 hover:border-slate-600 rounded-full shadow-lg backdrop-blur-sm transition-all duration-200 active:scale-95 cursor-pointer absolute z-30 -bottom-4"
                 @click="expandCode = ! expandCode">
-                <span x-show="!expandCode">Expand Code</span>
+                <span x-show="!expandCode">Expand Code </span>
                 <span x-show="expandCode">Collapse code</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4" :class="expandCode ? 'rotate-180':''">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                </svg>
             </button>
         </div>
-        <div class="flex absolute top-0 bottom-0 right-0 left-0 bg-gradient-to-r from-black/5 to-black/60 z-20"
+        <div class="flex absolute top-0 bottom-0 right-0 left-0 bg-gradient-to-b from-black/5 to-black/80 z-20"
             x-show="!expandCode">
         </div>
     </div>

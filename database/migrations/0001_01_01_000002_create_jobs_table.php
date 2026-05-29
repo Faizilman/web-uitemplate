@@ -15,11 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
-<<<<<<< HEAD
-            $table->unsignedTinyInteger('attempts');
-=======
             $table->unsignedSmallInteger('attempts');
->>>>>>> master
             $table->unsignedInteger('reserved_at')->nullable();
             $table->unsignedInteger('available_at');
             $table->unsignedInteger('created_at');

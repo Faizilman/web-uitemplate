@@ -18,5 +18,6 @@
             </svg>
             Loading
         </x-slot:pending>
+        t
     </x-ui.component.button>
 </div>
