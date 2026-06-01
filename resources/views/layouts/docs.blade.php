@@ -1,7 +1,5 @@
-@props(['title'])
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth dark">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -133,7 +131,6 @@
 </head>
 
 <body class="bg-black">
-
     <header class="sticky top-0 z-50 w-full z-[999] glass-nav border-b border-slate-800/50">
         <div class="max-w-[1536px] mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -163,28 +160,6 @@
             </div>
         </div>
     </header>
-<div x-data="{isPending: false, isDisabled: false}">
-
-    <x-ui.component.button variant="warning" size="md" @click="
-        isPending = true;
-
-        setTimeout(() => {
-            isPending = false
-        }, 2000)
-    ">
-    <x-slot:pending>
-        <span class="sr-only">
-            Loading...
-        </span>
-        <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-20" />
-            <path fill="currentColor" class="opacity-80" d="M12 2a10 10 0 0 1 10 10" />
-        </svg>
-        Loading...
-    </x-slot:pending>
-    klik
-</x-ui.component.button>
-</div>
 
     <div class="max-w-[1536px] mx-auto px-6 ">
         <div class="flex flex-col lg:flex-row gap-0">
@@ -232,6 +207,45 @@
                     {!! $content !!}
 
                 </article>
+                {{-- navigasi --}}
+                <div class="mt-20 border-t border-zinc-900 pt-8">
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <!-- Previous -->
+                        @if ($navigation['prev'])
+                        <a href="{{ route('docs.show', ['folder' => $navigation['prev']['folder'], 'page' => $navigation['prev']['page']]) }}" class="group rounded-2xl border border-zinc-900 bg-black p-6 transition-all duration-200 hover:border-zinc-800 hover:bg-zinc-950">
+                            <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-600">
+                                <svg class="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                                Previous
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold text-zinc-100 transition-colors group-hover:text-white">
+                                {{ $navigation['prev']['title'] }}
+                            </h3>
+                            <p class="mt-2 text-sm leading-6 text-zinc-500">
+                                {{ $navigation['prev']['desc'] }}
+                            </p>
+                        </a>
+                        @endif
+                        <!-- Next -->
+                        @if ($navigation['next'])
+                        <a href="{{ route('docs.show', ['folder' => $navigation['next']['folder'], 'page' => $navigation['next']['page']]) }}" class="group rounded-2xl border border-zinc-900 bg-black p-6 text-right transition-all duration-200 hover:border-zinc-800 hover:bg-zinc-950">
+                            <div class="flex items-center justify-end gap-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-600">
+                                Next
+                                <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <h3 class="mt-4 text-xl font-semibold text-zinc-100 transition-colors group-hover:text-white">
+                                {{ $navigation['next']['title'] }}
+                            </h3>
+                            <p class="mt-2 text-sm leading-6 text-zinc-500">
+                                {{ $navigation['next']['desc'] }}
+                            </p>
+                        </a>
+                        @endif
+                    </div>
+                </div>
                 <footer
                     class="mt-32 pt-10 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-8 text-[11px] font-bold text-slate-600 uppercase tracking-widest">
                     <p>© 2026 Nexus Labs. Developed by Faiz.</p>

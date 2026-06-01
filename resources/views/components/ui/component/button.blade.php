@@ -36,11 +36,8 @@
     */
 
     $base = '
-    inline-flex items-center justify-center gap-x-1
-    font-medium transition-all duration-200
-    active:scale-[0.98]
-    focus:outline-none focus-visible:ring-4
-    select-none
+    inline-flex items-center justify-center gap-x-1 font-medium transition-all duration-200
+    active:scale-[0.98] focus:outline-none focus-visible:ring-4 select-none cursor-pointer
     ';
 
     /*
@@ -61,8 +58,8 @@
         ',
 
         'tertiary' => '
-        bg-zinc-100/80 text-zinc-700 hover:bg-zinc-200 focus-visible:ring-zinc-300 shadow-sm
-        dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700
+        bg-white text-zinc-700 hover:bg-zinc-200 focus-visible:ring-zinc-300 shadow-sm
+        dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700/80
         ',
 
         'outline' => '
@@ -135,7 +132,7 @@
     |--------------------------------------------------------------------------
     */
 
-    $disabledClass = 'opacity-50 cursor-not-allowed';
+    $disabledClass = 'disabled:opacity-50 disabled:cursor-not-allowed';
 
     $disabled = $isDisabled || $isPending ? $disabledClass : '';
 
@@ -186,14 +183,14 @@
     :class="isPending ? '{{ $disabledClass }}' : ''"
 
     @if ($as === 'button')
-        type="{{ $type }}"
-        x-bind:disabled="isPending || @js($isDisabled)"
-    @endif
+    type="{{ $type }}"
+            x-bind:disabled="isPending || @js($isDisabled)"
+        @endif
 
-    @if ($as === 'a' && $href)
-        href="{{ $href }}"
-    @endif
->
+        @if ($as === 'a' && $href)
+            href="{{ $href }}"
+        @endif
+    >
 
     {{-- Pending --}}
     @isset($pending)

@@ -1,4 +1,4 @@
-# Button
+# According
 
 Buttons allow users to trigger actions and interact with the interface. Commonly built using the native HTML `button` element for actions such as submitting forms, opening modals, navigation, and interactive events.
 
@@ -25,7 +25,7 @@ The `Button` component includes two files:
 
 Use the default button for common actions such as saving data, submitting forms, or triggering events.
 
-[[demo:button{button}]]
+[[demo:according{according}]]
 
 The default variant uses the `primary` style with medium sizing.
 
