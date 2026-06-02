@@ -2,8 +2,11 @@
     'type' => 'single',
     'collapsible' => true,
     'defaultValue' => [],
-    'variant' => 'card'
-])
+    'variant' => 'card',
+    'size' => 'sm',
+    'transition' => 'normal',
+    'animation' => 'slide',
+    ])
 
 <div
     x-data="{

@@ -188,6 +188,11 @@
                         <h5 class="mb-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] px-4">Components
                         </h5>
                         <ul class="space-y-1 text-sm font-medium">
+                            <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'according']) }}"
+                                    class="flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/according')) nav-active @endif">According
+                                    <span
+                                        class="bg-blue-500/10 text-blue-400 text-[9px] px-1.5 py-0.5 rounded border border-blue-500/20 uppercase font-bold">Updated</span></a>
+                            </li>
                             <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'button']) }}"
                                     class="flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/button')) nav-active @endif">Buttons
                                     <span

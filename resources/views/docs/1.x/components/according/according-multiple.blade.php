@@ -1,35 +1,31 @@
-<x-ui.component.according>
+<x-ui.component.according type="multiple">
     <x-ui.component.according.according-item value="installation">
         <x-ui.component.according.according-trigger>
-            How do I install the component?
+            Installation
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            Install the package using Composer, publish the assets if required,
-            and register the service provider according to the installation guide.
+            Install the package using Composer and follow the setup guide.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
 
     <x-ui.component.according.according-item value="customization">
         <x-ui.component.according.according-trigger>
-            Can I customize the styles?
+            Customization
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            Yes. The component supports variants, sizes, animations, transitions,
-            and custom classes to match your design system.
+            Configure variants, sizes, animations, and transitions.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
 
     <x-ui.component.according.according-item value="accessibility">
         <x-ui.component.according.according-trigger>
-            Is the according accessible?
+            Accessibility
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            The component includes keyboard navigation, focus management,
-            semantic button behavior, and ARIA attributes for improved accessibility.
+            Includes keyboard navigation and ARIA support.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
-
 </x-ui.component.according>

@@ -1,35 +1,31 @@
 <x-ui.component.according>
     <x-ui.component.according.according-item value="installation">
         <x-ui.component.according.according-trigger>
-            How do I install the component?
+            Installation
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            Install the package using Composer, publish the assets if required,
-            and register the service provider according to the installation guide.
+            Follow the installation guide to quickly set up the component.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
 
-    <x-ui.component.according.according-item value="customization">
+    <x-ui.component.according.according-item value="premium" disabled>
         <x-ui.component.according.according-trigger>
-            Can I customize the styles?
+            Premium Features
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            Yes. The component supports variants, sizes, animations, transitions,
-            and custom classes to match your design system.
+            This content cannot be expanded because the item is disabled.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
 
     <x-ui.component.according.according-item value="accessibility">
         <x-ui.component.according.according-trigger>
-            Is the according accessible?
+            Accessibility
         </x-ui.component.according.according-trigger>
 
         <x-ui.component.according.according-content>
-            The component includes keyboard navigation, focus management,
-            semantic button behavior, and ARIA attributes for improved accessibility.
+            Learn about keyboard navigation, focus management, and ARIA support.
         </x-ui.component.according.according-content>
     </x-ui.component.according.according-item>
-
 </x-ui.component.according>

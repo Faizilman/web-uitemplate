@@ -18,7 +18,7 @@
 
     $bladePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.blade.php");
 
-    $vuePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.vue");
+    // $vuePath = resource_path("views/docs/1.x/{$folder}/{$component}/{$nameFile}.vue");
 
     /*
 |--------------------------------------------------------------------------
@@ -36,9 +36,9 @@
         $tabs['blade'] = trim(file_get_contents($bladePath));
     }
 
-    if (file_exists($vuePath)) {
-        $tabs['vue'] = trim(file_get_contents($vuePath));
-    }
+    // if (file_exists($vuePath)) {
+    //     $tabs['vue'] = trim(file_get_contents($vuePath));
+    // }
 
 @endphp
 

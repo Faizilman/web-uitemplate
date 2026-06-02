@@ -14,6 +14,12 @@ class DocsNavigation
             'folder' => 'getting-started',
             'page' => 'quick-start',
         ],
+        'according' => [
+            'title' => 'according',
+            'desc' => 'according klik',
+            'folder' => 'getting-started',
+            'page' => 'according',
+        ],
         'button' => [
             'title' => 'button',
             'desc' => 'button klik',

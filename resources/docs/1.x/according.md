@@ -1,6 +1,6 @@
-# According
+# according
 
-Buttons allow users to trigger actions and interact with the interface. Commonly built using the native HTML `button` element for actions such as submitting forms, opening modals, navigation, and interactive events.
+accordings allow users to expand and collapse sections of content. They are commonly used to organize large amounts of information into smaller, manageable sections while preserving screen space.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
 ![Tailwind](https://img.shields.io/badge/TailwindCSS-4-blue)
@@ -11,192 +11,246 @@ Buttons allow users to trigger actions and interact with the interface. Commonly
 
 Import the component before using it inside Blade views.
 
-[[copy-code:button{import}]]
+[[copy-code:according{import}]]
 
-The `Button` component includes two files:
+The `according` component includes multiple files:
 
-`app/View/Components/Ui/Button.php` — Handles component logic and configuration.
+`app/View/Components/Ui/according.php` — Handles component configuration and shared state.
 
-`resources/views/components/ui/button.blade.php` — Defines the component structure, styling, and appearance.
+`resources/views/components/ui/according.blade.php` — Defines the according container.
+
+`resources/views/components/ui/according/item.blade.php` — Defines an according item.
+
+`resources/views/components/ui/according/trigger.blade.php` — Defines the clickable trigger.
+
+`resources/views/components/ui/according/content.blade.php` — Defines the expandable content area.
 
 ---
 
 ### Usage Simple
 
-Use the default button for common actions such as saving data, submitting forms, or triggering events.
+Use the according to display expandable sections of related content.
 
 [[demo:according{according}]]
 
-The default variant uses the `primary` style with medium sizing.
+By default, the according uses the `card` variant with medium spacing and slide animation.
 
 ---
 
 ### Variants
 
-Variants control the visual appearance and semantic meaning of the button.
+Variants control the visual appearance of the according.
 
-[[demo:button{button-variant}]]
+[[demo:according{according-variant}]]
 
 #### Supported Variant Notes
 
-* `primary` → Main action button
-* `secondary` → Neutral secondary action
-* `tertiary` → Soft minimal appearance
-* `outline` → Transparent button with border
-* `ghost` → Lightweight transparent action
-* `info` → Informational action
-* `danger` → Destructive action
-* `dangerSoft` → Softer destructive appearance
-* `warning` → Warning or caution action
+* `card` → Rounded container with border and background styling.
+* `line` → Minimal appearance using divider lines between items.
 
 ---
 
 ### Sizes
 
-Sizes control the height, spacing, and font scale of the button.
+Sizes control spacing, padding, and typography throughout the according.
 
-[[demo:button{button-size}]]
+[[demo:according{according-size}]]
 
-#### Supported sizes
+#### Supported Sizes
 
-* `sm` → Compact layouts
-* `md` → Default balanced size
-* `lg` → Large emphasis actions
+* `sm` → Compact layouts and dense content
+* `md` → Default balanced spacing
+* `lg` → Larger content areas and improved readability
 
 ---
 
-### Icon Only
+### Multiple Items
 
-Use `isIconOnly` when the button only contains an icon.
+Allow multiple according items to remain open simultaneously.
 
-[[demo:button{button-icon-only}]]
-
-This mode automatically creates a circular layout optimized for icon-only actions.
+[[demo:according{according-multiple}]]
 
 Useful for:
 
-* Toolbar actions
-* Settings buttons
-* Close buttons
+* FAQs
+* Documentation sections
+* Knowledge bases
+* Content-heavy pages
+
+---
+
+### Single Item
+
+Restrict the according so only one item can remain open at a time.
+
+[[demo:according{according-single}]]
+
+Useful for:
+
+* Navigation menus
+* Settings panels
+* Category selectors
 * Compact interfaces
 
 ---
 
-### With Icon
+### Animations
 
-Buttons support icons alongside text content.
+Animations control how content enters and exits when expanded or collapsed.
 
-[[demo:button{button-with-icon}]]
+[[demo:according{according-animation}]]
 
-Useful for actions such as:
+#### Supported Animations
 
-* Create
-* Edit
-* Download
-* Upload
-* Navigation
-
-Icons automatically align with the button content.
+* `none` → No animation
+* `slide` → Vertical slide effect
+* `fade` → Opacity transition
+* `slide-fade` → Combined slide and fade effect
+* `scale` → Scale and fade transition
 
 ---
 
-### Loading
+### Transitions
 
-Display a loading indicator while an action is processing.
+Transitions control the speed of according animations.
 
-[[demo:button{button-loading}]]
+[[demo:according{according-transition}]]
 
-Loading states improve user experience by:
+#### Supported Transitions
 
-* Preventing repeated clicks
-* Providing visual feedback
-* Indicating asynchronous processing
-
----
-
-### Loading State
-
-Reactive loading state powered by Alpine.js.
-
-[[demo:button{button-loading-state}]]
-
-When active:
-
-* Button becomes disabled
-* Loading indicator appears
-* Original content is hidden
-* State updates reactively
-
-Best used for interactive frontend actions.
+* `fast` → 200ms
+* `normal` → 300ms
+* `slow` → 500ms
+* `slower` → 700ms
 
 ---
 
-### Disabled
+### Custom Indicator
 
-Prevent user interaction using the disabled state.
+Customize the indicator icon displayed in the trigger.
 
-[[demo:button{button-disabled}]]
-
-Disabled state automatically:
-
-* Prevent click interaction
-* Prevent form submission
-* Reduce opacity
-* Show `cursor-not-allowed`
-* Improve accessibility behavior
-
----
-
-### Full Width
-
-Expand the button to match the width of its parent container.
-
-[[demo:button{button-full-width}]]
+[[demo:according{according-indicator}]]
 
 Useful for:
 
-* Authentication forms
-* Mobile layouts
-* Responsive stacked actions
+* Chevron icons
+* Plus / Minus icons
+* Arrow indicators
+* Custom SVG icons
+
+Indicators can also be positioned before or after the trigger content.
 
 ---
 
-### Loading Button
+### Disabled Items
 
-The component supports both static and reactive loading states.
+Prevent specific according items from being opened.
 
-* `isPending` → Reactive Alpine.js loading state
-* `isStaticPending` → Static Blade loading state
+[[demo:according{according-disabled}]]
 
-Choose the approach that best fits your rendering needs.
+Disabled items automatically:
 
----
-
-### As Link
-
-Render the component as an anchor element instead of a native button.
-
-[[demo:button{button-link}]]
-
-Useful for navigation while maintaining consistent button styling.
+* Prevent interaction
+* Ignore click events
+* Display disabled styling
+* Improve accessibility behavior
 
 ---
 
 ### API Reference
 
-| Prop | Type | Default | Description |
-| :--- | :--- | :-----: | ----------: |
-| as   | **'button' \| 'a'** |  **'button'** | Defines the rendered HTML element. |
-| type | **'button' \| 'submit' \| 'reset'** | **'button'** | Specifies native button behavior within forms. |
-| href | **string \| null**                  | **null** | Link destination when using **as="a"**. |
-| variant | **'primary'**, **'secondary'**, **'tertiary'**, **'outline'**, **'ghost'**, **'info'**, **'danger'**, **'dangerSoft'**, **'warning'** | **'primary'** |  Defines the visual style and color appearance of the button. |
-| size | **'sm'**, **'md'**, **'lg'** | **'md'** | Controls the overall size, spacing, and font scale. |
-| isPending | **boolean** | **false** | Enables Alpine.js reactive loading state. |
-| fullWidth | **boolean** | **false** | Expands the button to occupy the full width of its container. |
-| isDisabled | **boolean** | **false** | Disables interaction and applies inactive styling. |
-| isIconOnly | **boolean** | **false** | Optimizes layout for icon-only buttons. |
+#### Accordion
+
+| Prop              | Type                                                   |    Default   |                                                                    Description |
+| :---------------- | :----------------------------------------------------- | :----------: | -----------------------------------------------------------------------------: |
+| variant           | **'card' | 'line'**                                    |  **'card'**  |                                Defines the visual appearance of the accordion. |
+| size              | **'sm' | 'md' | 'lg'**                                 |   **'sm'**   |            Controls spacing, padding, and typography throughout the accordion. |
+| type              | **'single' | 'multiple'**                              | **'single'** | Determines whether one or multiple items can remain expanded at the same time. |
+| animation         | **'none' | 'slide' | 'fade' | 'slide-fade' | 'scale'** |  **'slide'** |                  Controls how accordion content enters and exits the viewport. |
+| transition        | **'fast' | 'normal' | 'slow' | 'slower'**              | **'normal'** |                                 Controls the duration of accordion animations. |
+| indicatorPosition | **'left' | 'right' | 'both'**                          |  **'right'** |                    Controls where indicators are displayed within the trigger. |
+| collapsible       | **boolean**                                            |   **true**   |                      Allows an opened item to be collapsed when clicked again. |
 
 ---
+
+#### Accordion Item
+
+| Prop     | Type        |  Default  |                                                       Description |
+| :------- | :---------- | :-------: | ----------------------------------------------------------------: |
+| value    | **string**  |     —     | Unique identifier used to manage the accordion item's open state. |
+| disabled | **boolean** | **false** |     Prevents the accordion item from being expanded or collapsed. |
+
+---
+
+#### Accordion Trigger Slots
+
+| Slot           | Description                                                         |
+| :------------- | :------------------------------------------------------------------ |
+| default        | The trigger label or content displayed inside the accordion header. |
+| indicatorLeft  | Custom indicator displayed before the trigger content.              |
+| indicatorRight | Custom indicator displayed after the trigger content.               |
+
+---
+
+#### Supported Variants
+
+| Variant | Description                                                      |
+| :------ | :--------------------------------------------------------------- |
+| `card`  | Displays accordion items inside bordered and rounded containers. |
+| `line`  | Uses divider lines for a cleaner and more minimal appearance.    |
+
+---
+
+#### Supported Sizes
+
+| Size | Description                                                |
+| :--- | :--------------------------------------------------------- |
+| `sm` | Compact spacing and typography for dense layouts.          |
+| `md` | Balanced spacing suitable for most interfaces.             |
+| `lg` | Increased spacing and typography for enhanced readability. |
+
+---
+
+#### Supported Types
+
+| Type       | Description                                              |
+| :--------- | :------------------------------------------------------- |
+| `single`   | Only one accordion item can remain open at a time.       |
+| `multiple` | Multiple accordion items can remain open simultaneously. |
+
+---
+
+#### Supported Animations
+
+| Animation    | Description                                               |
+| :----------- | :-------------------------------------------------------- |
+| `none`       | No animation is applied.                                  |
+| `slide`      | Content slides vertically when expanding or collapsing.   |
+| `fade`       | Content fades in and out using opacity transitions.       |
+| `slide-fade` | Combines slide and fade effects for smoother transitions. |
+| `scale`      | Content scales and fades into view when expanded.         |
+
+---
+
+#### Supported Transitions
+
+| Transition | Duration |
+| :--------- | -------: |
+| `fast`     |    200ms |
+| `normal`   |    300ms |
+| `slow`     |    500ms |
+| `slower`   |    700ms |
+
+---
+
+#### Supported Indicator Positions
+
+| Position | Description                                               |
+| :------- | :-------------------------------------------------------- |
+| `left`   | Displays the indicator before the trigger content.        |
+| `right`  | Displays the indicator after the trigger content.         |
+| `both`   | Displays indicators on both sides of the trigger content. |
+
 
 ### Accessibility
 
@@ -206,7 +260,8 @@ Supported:
 
 * Keyboard navigation
 * Focus visibility
-* Disabled state
-* Loading state
 * ARIA attributes
-* Native button behavior
+* Expand / collapse state
+* Disabled state
+* Screen reader support
+* Semantic button behavior
