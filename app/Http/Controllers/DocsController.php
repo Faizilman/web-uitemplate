@@ -18,7 +18,7 @@ class DocsController extends Controller
     public function show($folder, $page)
     {
 
-        $html = $this->docsService->markDownToHtml($page);
+        $html = $this->docsService->markDownToHtml($folder, $page);
 
         $toc = TocGenerator::make($html);
         $html = $this->docsService->parseDemoTags($html, $folder);

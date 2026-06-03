@@ -11,14 +11,14 @@ use League\CommonMark\MarkdownConverter;
 
 class DocsService
 {
-    public static function markDownToHtml($page)
+    public static function markDownToHtml($folder, $page)
     {
         /*
     |--------------------------------------------------------------------------
     | Markdown Path
     |--------------------------------------------------------------------------
     */
-        $path = resource_path("docs/1.x/{$page}.md");
+        $path = resource_path("docs/1.x/{$folder}/{$page}.md");
 
         abort_unless(
             file_exists($path),

@@ -6,32 +6,32 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class DocsNavigation
 {
-
+    
     private static $urlLinks = [
         'quick-start' => [
-            'title' => 'quick-start',
+            'title' => 'Quick Start',
             'desc' => 'quick-start klik',
             'folder' => 'getting-started',
             'page' => 'quick-start',
         ],
-        'according' => [
-            'title' => 'according',
-            'desc' => 'according klik',
+        'installation' => [
+            'title' => 'Installation',
+            'desc' => 'installation klik',
             'folder' => 'getting-started',
-            'page' => 'according',
+            'page' => 'installation',
+        ],
+        'according' => [
+        'title' => 'According',
+        'desc' => 'according klik',
+        'folder' => 'components',
+        'page' => 'according',
         ],
         'button' => [
-            'title' => 'button',
+            'title' => 'Button',
             'desc' => 'button klik',
             'folder' => 'components',
             'page' => 'button',
         ],
-        'installation' => [
-            'title' => 'installation',
-            'desc' => 'installation klik',
-            'folder' => 'getting-started',
-            'page' => 'installation',
-        ]
     ];
 
     public static function getNamePage(string $page, bool $next = false){
