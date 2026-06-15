@@ -1,264 +1,226 @@
 # Alert
 
-Alerts are used to display important messages, status updates, warnings, or information that requires the user's attention.
+Alerts communicate important information, status updates, warnings, or errors to users. They are commonly used to provide feedback after actions or to display contextual messages that require attention.
 
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
 ![Tailwind](https://img.shields.io/badge/TailwindCSS-4-blue)
 
 ---
 
-## Import
+### Import
+
+Import the component before using it inside Blade views.
 
 [[copy-code:alert{import}]]
 
----
+The `Alert` component includes two files:
 
-## Basic Usage
+`app/View/Components/Ui/Alert.php` — Handles component logic and configuration.
 
-Use the `Alert` component to communicate important information to users.
-
-<x-alert variant="info">
-    <x-alert-title>
-        Information
-    </x-alert-title>
-
-    <x-alert-description>
-        This is an informational message.
-    </x-alert-description>
-</x-alert>
-
-### Preview
-
-[[preview:alert/basic]]
-
-### Code
-
-[[copy-code:alert/basic]]
+`resources/views/components/ui/alert.blade.php` — Defines the component structure, styling, behavior, and animations.
 
 ---
 
-## Variants
+### Usage Simple
 
-The Alert component supports multiple variants.
+Use the default alert to display informational messages.
 
-### Info
+[[demo:alert{alert}]]
 
-<x-alert variant="info">
-    <x-alert-title>
-        Information
-    </x-alert-title>
-
-    <x-alert-description>
-        New features are available in the latest release.
-    </x-alert-description>
-</x-alert>
-
-[[preview:alert/info]]
-
-[[copy-code:alert/info]]
+The default configuration uses the `soft` variant with the `info` color.
 
 ---
 
-### Success
 
-<x-alert variant="success">
-    <x-alert-title>
-        Success
-    </x-alert-title>
+### With Title
 
-    <x-alert-description>
-        Your settings have been saved successfully.
-    </x-alert-description>
-</x-alert>
+Alerts support a dedicated title slot for better hierarchy.
 
-[[preview:alert/success]]
+[[demo:alert{alert-title}]]
 
-[[copy-code:alert/success]]
+The title helps users quickly identify the purpose of the message.
 
 ---
 
-### Warning
+### With Description
 
-<x-alert variant="warning">
-    <x-alert-title>
-        Warning
-    </x-alert-title>
+Longer explanations can be placed inside the description slot.
 
-    <x-alert-description>
-        This action cannot be undone.
-    </x-alert-description>
-</x-alert>
+[[demo:alert{alert-description}]]
 
-[[preview:alert/warning]]
-
-[[copy-code:alert/warning]]
+Useful for displaying additional details without overwhelming the interface.
 
 ---
 
-### Danger
+### Variants
 
-<x-alert variant="danger">
-    <x-alert-title>
-        Error
-    </x-alert-title>
+Variants control the visual appearance of the alert.
 
-    <x-alert-description>
-        Something went wrong while processing your request.
-    </x-alert-description>
-</x-alert>
+[[demo:alert{alert-variant}]]
 
-[[preview:alert/danger]]
+#### Supported variants
 
-[[copy-code:alert/danger]]
+* `soft` → Soft background with subtle border
+* `bordered` → White background with colored left accent border
 
 ---
 
-## Without Description
+### Colors
 
-The description section is optional.
+Colors define the semantic meaning of the alert.
 
-<x-alert variant="warning">
-    <x-alert-title>
-        Warning
-    </x-alert-title>
-</x-alert>
+[[demo:alert{alert-color}]]
 
-### Preview
+#### Supported colors
 
-[[preview:alert/without-description]]
-
-### Code
-
-[[copy-code:alert/without-description]]
+* `success` → Successful actions
+* `info` → Informational messages
+* `warning` → Warnings and cautions
+* `danger` → Errors and destructive events
+* `neutral` → Generic notifications
 
 ---
 
-## Long Content
 
-Alerts can contain longer descriptions.
+### Custom Icon
 
-<x-alert variant="info">
-    <x-alert-title>
-        Documentation Update
-    </x-alert-title>
+Replace the default icon using the `icon` slot.
 
-    <x-alert-description>
-        The documentation has been updated to include new examples,
-        improved accessibility guidelines, and additional component APIs.
-    </x-alert-description>
-</x-alert>
+[[demo:alert]]
 
-### Preview
-
-[[preview:alert/long-content]]
-
-### Code
-
-[[copy-code:alert/long-content]]
+Useful for branding or representing custom notification types.
 
 ---
 
-## Anatomy
+### Dismissible
 
-```html
-<Alert>
-    <AlertTitle />
-    <AlertDescription />
-</Alert>
-```
+Enable a built-in close button using the `dismissible` property.
 
----
+[[demo:alert{alert-dismissible}]]
 
-## Components
-
-### Alert
-
-The root container component.
-
-| Prop | Type | Default |
-|--------|--------|--------|
-| variant | string | info |
+The default close button automatically hides the alert when clicked.
 
 ---
 
-### AlertTitle
+### Custom Action
 
-Displays the alert title.
+Replace the default close button with custom actions.
 
-| Prop | Type | Default |
-|--------|--------|--------|
-| class | string | null |
+[[demo:alert{alert-custom-icon}]]
 
----
+Useful for:
 
-### AlertDescription
-
-Displays additional information.
-
-| Prop | Type | Default |
-|--------|--------|--------|
-| class | string | null |
+* Retry actions
+* Undo buttons
+* View details links
+* Custom controls
 
 ---
 
-## Available Variants
+### Auto Close
 
-| Variant | Description |
-|----------|-------------|
-| info | General information |
-| success | Successful actions |
-| warning | Warning messages |
-| danger | Error messages |
+Automatically dismiss alerts after a specified duration.
 
----
+[[demo:alert{alert-auto-close}]]
 
-## Accessibility
+The alert closes itself after the configured number of milliseconds.
 
-- Uses semantic content structure.
-- Provides visual distinction between variants.
-- Supports keyboard navigation.
-- Maintains sufficient color contrast in light and dark mode.
+Example:
+
+* `1000` → 1 second
+* `3000` → 3 seconds
+* `5000` → 5 seconds
 
 ---
 
-## Examples
+### Progress Bar
 
-### Account Created
+Display a visual countdown while auto close is active.
 
-<x-alert variant="success">
-    <x-alert-title>
-        Account Created
-    </x-alert-title>
+[[demo:alert{alert-progressbar}]]
 
-    <x-alert-description>
-        Your account has been created successfully.
-    </x-alert-description>
-</x-alert>
+The progress bar shrinks until the alert is dismissed automatically.
 
 ---
 
-### Maintenance Notice
+### Pause On Hover
 
-<x-alert variant="warning">
-    <x-alert-title>
-        Scheduled Maintenance
-    </x-alert-title>
+Pause the auto close timer while hovering over the alert.
 
-    <x-alert-description>
-        The service will be unavailable on Sunday from 01:00 to 03:00 UTC.
-    </x-alert-description>
-</x-alert>
+[[demo:alert{alert-pause-on-hover}]]
+
+Useful when users need additional time to read important messages.
 
 ---
 
-### Connection Error
+### Animations
 
-<x-alert variant="danger">
-    <x-alert-title>
-        Connection Failed
-    </x-alert-title>
+Customize the enter and leave transition.
 
-    <x-alert-description>
-        Unable to connect to the server. Please try again later.
-    </x-alert-description>
-</x-alert>
+[[demo:alert]]
+
+#### Supported animations
+
+* `fade` → Smooth opacity transition
+* `scale` → Fade with zoom effect
+* `slide` → Horizontal slide transition
+* `slide-fade` → Combined slide and fade effect
+
+---
+
+### Combination Example
+
+Multiple features can be combined together.
+
+[[demo:alert]]
+
+Example features:
+
+* Bordered variant
+* Success color
+* Auto close
+* Progress bar
+* Pause on hover
+* Dismissible
+* Scale animation
+
+---
+
+### API Reference
+
+| Prop           | Type                                                      |   Default  |                                                  Description |
+| :------------- | :-------------------------------------------------------- | :--------: | -----------------------------------------------------------: |
+| `variant`      | **`soft` | `bordered` | `solid`**                         | **`soft`** |                      Controls the visual style of the alert. |
+| `color`        | **`success` | `info` | `warning` | `danger` | `neutral`** | **`info`** |                       Defines the semantic color appearance. |
+| `dismissible`  | **boolean**                                               |  **false** |                           Displays the default close button. |
+| `animation`    | **`fade` | `scale` | `slide` | `slide-fade`**             | **`fade`** |                        Controls enter and leave transitions. |
+| `autoClose`    | **number | null**                                         |  **null**  | Automatically closes the alert after the specified duration. |
+| `showProgress` | **boolean**                                               |  **false** |                   Displays an auto close progress indicator. |
+| `pauseOnHover` | **boolean**                                               |  **false** |                  Pauses the auto close timer while hovering. |
+
+---
+
+### Slots
+
+| Slot          |                                            Description |
+| :------------ | -----------------------------------------------------: |
+| Default       |                                    Main alert content. |
+| `title`       |         Alert heading displayed above the description. |
+| `description` |                           Additional explanatory text. |
+| `icon`        |                       Replaces the default alert icon. |
+| `action`      | Replaces the default close button with custom content. |
+
+---
+
+### Accessibility
+
+The component includes built-in accessibility support.
+
+Supported:
+
+* Semantic `role="alert"`
+* Keyboard accessible buttons
+* Focus visibility
+* Screen reader friendly content
+* Dismissible controls
+* Accessible interactive actions

@@ -1,13 +1,7 @@
-<h5
-    {{
-        $attributes->merge([
-            'class' => '
-                font-semibold
-                leading-none
-                tracking-tight
-            '
-        ])
-    }}
->
+@props([
+    'as' => 'h3',
+])
+
+<{{ $as }} {{ $attributes->merge(['class' => 'font-semibold text-sm leading-snug']) }}>
     {{ $slot }}
-</h5>
+</{{ $as }}>

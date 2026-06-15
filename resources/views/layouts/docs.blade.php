@@ -286,8 +286,19 @@
         </div>
     </div>
     <script>
-        hljs.highlightAll();
-        hljs.initLineNumbersOnLoad();
+    document.addEventListener('DOMContentLoaded', () => {
+
+        document.querySelectorAll('pre code').forEach((block) => {
+
+            hljs.highlightElement(block);
+
+            if (block.textContent && block.textContent.trim() !== '') {
+                hljs.lineNumbersBlock(block);
+            }
+
+        });
+
+    });
 
         const hamburger = document.querySelector('#hamburger');
         const aside = document.querySelector('#aside');

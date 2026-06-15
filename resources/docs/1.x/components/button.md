@@ -157,7 +157,7 @@ Useful for:
 
 * Authentication forms
 * Mobile layouts
-* Responsive stacked actions
+* Responsive stacked actions    
 
 ---
 

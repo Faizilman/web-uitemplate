@@ -1,10 +1,5 @@
 @php
-    $variants = [
 
-    'soft',
-    'bordered',
-
-];
 
 $colors = [
 
@@ -43,25 +38,21 @@ $descriptions = [
 
 class="space-y-6 w-full" >
 
-    @foreach ($variants as $variant)
         @foreach ($colors as $color)
         <x-ui.component.alert
-            variant="{{ $variant }}"
             color="{{ $color }}"
-            :dismissible="true"
             animation="scale"
             {{-- :auto-close="8000" --}}
             {{-- show-progress --}}
             {{-- pause-on-hover --}}
             >
             <x-ui.component.alert.alert-title>
-                {{ $variant . ' ' . $color }}
+                {{ ucfirst($color) }} Color
             </x-ui.component.alert.alert-title>
             <x-ui.component.alert.alert-description>
                 {{ $descriptions[$color] }}
             </x-ui.component.alert.alert-description>
         </x-ui.component.alert>
         @endforeach
-    @endforeach
 
 </div>
