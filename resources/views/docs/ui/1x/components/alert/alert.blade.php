@@ -48,7 +48,6 @@ class="space-y-6 w-full" >
         <x-ui.component.alert
             variant="{{ $variant }}"
             color="{{ $color }}"
-            :dismissible="true"
             animation="scale"
             {{-- :auto-close="8000" --}}
             {{-- show-progress --}}

@@ -1,0 +1,109 @@
+[
+    {
+        "slug": "button",
+        "title": "Button",
+        "category": "Components",
+        "description": "Button component.",
+        "url": "/components/button",
+        "keywords": [
+            "button",
+            "btn",
+            "action"
+        ],
+        "sections": [
+            {
+                "type": "import",
+                "slug": "import",
+                "title": "Import",
+                "url": "/components/button#import"
+            },
+            {
+                "type": "variants",
+                "title": "Variants",
+                "slug": "variants",
+                "url": "/components/button#variants",
+                "items": [
+                    {
+                        "name": "solid",
+                        "label": "Solid",
+                        "description": "Default button style."
+                    },
+                    {
+                        "name": "outline",
+                        "label": "Outline",
+                        "description": "Border only."
+                    },
+                    {
+                        "name": "soft",
+                        "label": "Soft",
+                        "description": "Soft background."
+                    }
+                ]
+            },
+            {
+                "type": "sizes",
+                "title": "Sizes",
+                "url": "/components/button#sizes",
+                "items": [
+                    {
+                        "name": "Small Size",
+                        "label": "sm",
+                        "description": "Default Button size."
+                    },
+                    {
+                        "name": "Medium Size",
+                        "label": "md",
+                        "description": "Button Medium size."
+                    },
+                    {
+                        "name": "Large Size",
+                        "label": "lg",
+                        "description": "Button Large size."
+                    }
+                ]
+            },
+            {
+                "type": "icon-only",
+                "slug": "icon-only",
+                "title": "Icon Only",
+                "url": "/components/button#icon-only"
+            },
+            {
+                "type": "loading",
+                "slug": "loading",
+                "title": "Loading",
+                "url": "/components/button#loading"
+            },
+            {
+                "type": "loading-state",
+                "slug": "loading-state",
+                "title": "Loading State",
+                "url": "/components/button#loading-state"
+            },
+            {
+                "type": "disabled",
+                "slug": "disabled",
+                "title": "Disabled",
+                "url": "/components/button#disabled"
+            },
+            {
+                "type": "full-width",
+                "slug": "full-width",
+                "title": "Full Width",
+                "url": "/components/button#full-width"
+            },
+            {
+                "type": "as-link",
+                "slug": "as-link",
+                "title": "As Link",
+                "url": "/components/button#as-link"
+            },
+            {
+                "type": "api-reference",
+                "slug": "api-reference",
+                "title": "Api Reference",
+                "url": "/components/button#api-reference"
+            }
+        ]
+    }
+]

@@ -42,9 +42,9 @@
 
 @endphp
 
-<div class="w-full max-w-4xl mx-auto mt-10 border border-slate-700 rounded-xl bg-[#010101] shadow-2xl">
+<div class="w-full max-w-4xl mx-auto mt-10 border border-zinc-700 rounded-xl bg-[#010101] shadow-2xl">
 
-    <div class="not-prose p-12 flex justify-center items-center bg-center border-b border-slate-700">
+    <div class="not-prose p-12 flex justify-center items-center bg-center border-b border-zinc-700">
         @include($preview)
     </div>
 

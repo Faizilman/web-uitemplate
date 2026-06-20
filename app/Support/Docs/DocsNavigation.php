@@ -10,7 +10,7 @@ class DocsNavigation
     private static $urlLinks = [
         'quick-start' => [
             'title' => 'Quick Start',
-            'desc' => 'quick-start klik',
+            'desc' => 'start 1 second',
             'folder' => 'getting-started',
             'page' => 'quick-start',
         ],
@@ -21,10 +21,16 @@ class DocsNavigation
             'page' => 'installation',
         ],
         'according' => [
-        'title' => 'According',
-        'desc' => 'according klik',
-        'folder' => 'components',
-        'page' => 'according',
+            'title' => 'According',
+            'desc' => 'according klik',
+            'folder' => 'components',
+            'page' => 'according',
+        ],
+        'alert' => [
+            'title' => 'alert',
+            'desc' => 'alert klik',
+            'folder' => 'components',
+            'page' => 'alert',
         ],
         'button' => [
             'title' => 'Button',

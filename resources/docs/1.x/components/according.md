@@ -1,4 +1,4 @@
-# according
+# According
 
 accordings allow users to expand and collapse sections of content. They are commonly used to organize large amounts of information into smaller, manageable sections while preserving screen space.
 

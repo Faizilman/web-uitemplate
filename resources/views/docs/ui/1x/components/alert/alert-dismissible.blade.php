@@ -1,11 +1,9 @@
 <div
     x-data="{
-    showAlert: false,
-    
+    showAlert: true,
     }"
     class="mx-auto relative w-full h-full"
     @notifys="showAlert = true"
-    {{-- @notifys="$refs.singa.__x.$data.show()" --}}
 >
 
     <x-ui.component.alert variant="bordered" animation="fade" dismissible x-model="showAlert">

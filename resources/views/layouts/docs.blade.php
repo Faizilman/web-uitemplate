@@ -37,7 +37,7 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #6366f1;
+            background: #155dfc;
         }
 
         .glass-nav {
@@ -116,12 +116,11 @@
         }
 
         table thead tr {
-            background-color: oklch(27.4% 0.006 286.033);
+            background-color: #18181b;
         }
 
         table thead tr th:first-child {
             border-radius: 5px 0 0 5px;
-            padding-left: 4px;
         }
 
         table thead tr th:last-child {
@@ -130,7 +129,97 @@
     </style>
 </head>
 
-<body class="bg-black">
+<body class="bg-black " x-data="{
+        openSearch: false,
+        search: '',
+
+        docs: [],
+        show: true,
+
+        async init(){
+            const response = await fetch('../../../json/search.json');
+            this.docs = await response.json();
+        },
+        get filteredItems() {
+
+            if(this.search.trim() === ''){
+                return []; 
+            }
+
+           const keyword = this.search.toLowerCase();
+
+           return this.docs.filter(doc => {
+                return (
+                    doc.title.toLowerCase().includes(keyword) ||
+                    doc.description.toLowerCase().includes(keyword) ||
+                    doc.keywords.some(k =>
+                        k.toLowerCase().includes(keyword)
+                    )
+                );
+           })
+        }
+    }">
+    <div 
+      
+        x-show="openSearch"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @keydown.esc.prevent.window="openSearch = false"
+        id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-gray-900/50 p-4 backdrop-blur-sm sm:p-6 md:p-20 dark:bg-gray-950/70">
+        <div
+        @click.outside="openSearch = false"
+        class="animate-in fade-in zoom-in-95 mt-10 w-full max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5 transition-all duration-150 md:mt-16 dark:divide-gray-800 dark:bg-gray-900 dark:ring-white/10">
+            
+            <div class="relative flex items-center px-4">
+                <svg class="pointer-events-none h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input x-ref="searchInput" x-model="search" type="text"  id="search-input" class="h-14 w-full border-0 bg-transparent pr-10 pl-3 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm dark:text-gray-100 dark:placeholder:text-gray-500" placeholder="Ketik kata kunci untuk mencari..." autocomplete="off" />
+                <button id="close-search-btn" @click="openSearch = false" class="cursor-pointer absolute right-4 text-lg text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">&times;</button>
+            </div>
+
+            <div id="search-results" class="max-height-[350px] overflow-y-auto p-3 text-sm text-gray-700 dark:text-gray-300">
+                <div class="space-y-1 block peer-placeholder-shown/input:hidden">
+                    <div class="px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 dark:text-gray-500">Hasil Pencarian Terkait</div>
+                    <template x-for="(item, index) in filteredItems" :key="index">
+                        <a :href="item.url" 
+                        @mouseenter="activeIndex = index"
+                        class="block rounded-lg p-3 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500 transition-colors">
+                        <div class="flex flex-col">
+                            <span 
+                                class="text-xs font-semibold uppercase tracking-wider" 
+                                x-text="item.category"></span>
+                            <span class="font-medium" x-text="item.title"></span>
+                        </div>
+                        </a>
+                    </template>
+                </div>
+                <div class="py-14 text-center text-gray-400 dark:text-gray-500" x-show="filteredItems.length === 0">
+                    <svg class="mx-auto mb-2 h-6 w-6 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path>
+                    </svg>
+                    <p>Belum ada pencarian terbaru.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4 bg-gray-50 px-4 py-2.5 text-xs text-gray-500 dark:bg-gray-800/50 dark:text-gray-400">
+            <span class="flex items-center gap-1">
+                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↵</kbd> Pilih
+            </span>
+            <span class="flex items-center gap-1">
+                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↑</kbd>
+                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↓</kbd> Navigasi
+            </span>
+            <span class="flex items-center gap-1">
+                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">esc</kbd> Tutup
+            </span>
+            </div>
+        </div>
+    </div>
     <header class="sticky top-0 z-50 w-full z-[999] glass-nav border-b border-slate-800/50">
         <div class="max-w-[1536px] mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -149,6 +238,9 @@
 
             <div class="flex items-center gap-6">
                 <div
+                    @click="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
+                    @keydown.window.ctrl.k.prevent="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
+                    @keydown.window.cmd.k.prevent="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
                     class="hidden md:flex items-center gap-3 bg-slate-900/50 border border-slate-800 rounded-lg px-3 py-1.5 text-sm text-slate-500 w-64">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -189,21 +281,36 @@
                         </h5>
                         <ul class="space-y-1 text-sm font-medium">
                             <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'according']) }}"
-                                    class="flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/according')) nav-active @endif">According
+                                    class="group flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/according')) nav-active @endif">
+                                    <span class="@if (!request()->is('docs/1.x/components/according')) group-hover:translate-x-1 transition-all @endif">
+                                        According
+                                    </span>
                                     <span
                                         class="bg-blue-500/10 text-blue-400 text-[9px] px-1.5 py-0.5 rounded border border-blue-500/20 uppercase font-bold">Updated</span></a>
                             </li>
                             <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'alert']) }}"
-                                    class="flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/alert')) nav-active @endif">Alert
+                                    class="group flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/alert')) nav-active @endif">
+                                    <span class="@if (!request()->is('docs/1.x/components/alert')) group-hover:translate-x-1 transition-all @endif">
+                                        Alert
+                                    </span>
                                     <span
                                         class="bg-blue-500/10 text-blue-400 text-[9px] px-1.5 py-0.5 rounded border border-blue-500/20 uppercase font-bold">Updated</span></a>
                             </li>
                             <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'button']) }}"
-                                    class="flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/button')) nav-active @endif">Buttons
+                                    class="group flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/button')) nav-active @endif">
+                                    <span class="@if (!request()->is('docs/1.x/components/button')) group-hover:translate-x-1 transition-all @endif">
+                                        Button
+                                    </span>
                                     <span
                                         class="bg-blue-500/10 text-blue-400 text-[9px] px-1.5 py-0.5 rounded border border-blue-500/20 uppercase font-bold">New</span></a>
                             </li>
-                            <li><a href="#" class="block px-4 py-2 hover:text-white transition-all">Modals</a>
+                            <li><a href="{{ route('docs.show', ['folder' => 'components', 'page' => 'date-picker']) }}"
+                                    class="group flex px-4 py-2 hover:text-white transition-all justify-between @if (request()->is('docs/1.x/components/date-picker')) nav-active @endif">
+                                    <span class="@if (!request()->is('docs/1.x/components/date-picker')) group-hover:translate-x-1 transition-all @endif">
+                                        Date Picker
+                                    </span>
+                                    <span
+                                        class="bg-blue-500/10 text-blue-400 text-[9px] px-1.5 py-0.5 rounded border border-blue-500/20 uppercase font-bold">New</span></a>
                             </li>
                         </ul>
                     </div>
@@ -257,8 +364,8 @@
                     </div>
                 </div>
                 <footer
-                    class="mt-32 pt-10 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-8 text-[11px] font-bold text-slate-600 uppercase tracking-widest">
-                    <p>© 2026 Nexus Labs. Developed by Faiz.</p>
+                    class="mt-32 pt-10 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-8 text-[11px] font-bold text-slate-600 tracking-widest">
+                    <p>© 2026 AtlasUI. Developed by team Atlas.</p>
                     <div class="flex gap-10">
                         <a href="#" class="hover:text-white transition-colors">Documentation</a>
                         <a href="#" class="hover:text-white transition-colors">Changelog</a>
@@ -274,7 +381,7 @@
                         <nav class="space-y-5 text-[13px] font-medium border-l border-slate-800 h-64 overflow-y-auto">
                             @foreach ($toc as $t)
                                 <a href="#{{ $t['slug'] }}" data-fragment="{{ $t['slug'] }}" id="asideRight"
-                                    class="block pl-4 -ml-px transition-all @if (request()->is(request()->path() . '#' . $t['slug'])) text-blue-400 border-l-2 border-blue-500 @endif">{{ $t['title'] }}</a>
+                                    class="block pl-4 -ml-px transition-all hover:text-blue-600">{{ $t['title'] }}</a>
                             @endforeach
                         </nav>
                     </div>
@@ -319,9 +426,9 @@
             function setActive(id) {
                 links.forEach(link => {
                     const isActive = link.dataset.fragment === id;
-                    link.classList.toggle('text-blue-400', isActive);
+                    link.classList.toggle('text-blue-600', isActive);
                     link.classList.toggle('border-l-2', isActive);
-                    link.classList.toggle('border-blue-500', isActive);
+                    link.classList.toggle('border-blue-600', isActive);
                     link.classList.toggle('text-gray-600', !isActive);
                 });
             }

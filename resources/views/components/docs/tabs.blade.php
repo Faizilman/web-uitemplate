@@ -5,12 +5,12 @@
 
 
     {{-- Header --}}
-    <div class="flex items-center justify-between px-4 py-2 bg-[#111827] border-b border-slate-700">
+    <div class="flex items-center justify-between px-4 py-2.5 bg-[#09090b] border-b border-zinc-700">
         <div class="flex space-x-4 ">
             @foreach ($tabs as $name => $code)
                 <button @click="tab = '{{ $name }}'"
-                    :class="tab === '{{ $name }}' ? 'text-blue-400 border-b-2 border-blue-500' : 'text-slate-400'"
-                    class="cursor-pointer text-xs font-medium pb-1 tracking-wider uppercase focus:outline-none">{{ $name }}</button>
+                    :class="tab === '{{ $name }}' ? 'text-blue-400 border-b-2 border-blue-500' : 'text-zinc-400'"
+                    class="cursor-pointer text-xs font-medium pb-1 tracking-wider uppercase focus:outline-none ">{{ $name }}</button>
             @endforeach
         </div>
     </div>
