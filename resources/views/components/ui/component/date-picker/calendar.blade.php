@@ -47,6 +47,8 @@ $variants = [
     'line' => '
         border border-zinc-300
         dark:border-zinc-700
+        bg-white
+        dark:bg-[#010101]
     ',
 
 ];

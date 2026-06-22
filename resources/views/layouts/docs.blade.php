@@ -135,11 +135,28 @@
 
         docs: [],
         show: true,
+        activeIndex: 0,
 
         async init(){
             const response = await fetch('../../../json/search.json');
             this.docs = await response.json();
         },
+
+        nextItem(){
+            if(this.filteredItems.length - 1 == this.activeIndex){
+                return;
+            }
+            return this.activeIndex++;
+        },
+
+        prevItem(){
+            if(this.activeIndex == 0){
+                return;
+            }
+            return this.activeIndex--;
+            
+        },
+
         get filteredItems() {
 
             if(this.search.trim() === ''){
@@ -169,26 +186,43 @@
         x-transition:leave-start="opacity-100"
         x-transition:leave-end="opacity-0"
         @keydown.esc.prevent.window="openSearch = false"
-        id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-gray-900/50 p-4 backdrop-blur-sm sm:p-6 md:p-20 dark:bg-gray-950/70">
+        @keydown.window.arrow-down.prevent="
+            if(openSearch && filteredItems.length != 0){
+                nextItem();
+            }"
+        @keydown.window.arrow-up.prevent=" 
+            if(openSearch && filteredItems.length != 0){
+                prevItem();
+            }"
+        id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-zinc-900/50 p-4 backdrop-blur-sm sm:p-6 md:p-20 dark:bg-zinc-950/70">
         <div
         @click.outside="openSearch = false"
-        class="animate-in fade-in zoom-in-95 mt-10 w-full max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5 transition-all duration-150 md:mt-16 dark:divide-gray-800 dark:bg-gray-900 dark:ring-white/10">
+
+        class="animate-in fade-in zoom-in-95 mt-10 w-full max-w-xl transform divide-y divide-zinc-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5 transition-all duration-150 md:mt-16 dark:divide-zinc-800 dark:bg-zinc-900 dark:ring-white/10">
             
             <div class="relative flex items-center px-4">
-                <svg class="pointer-events-none h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg class="pointer-events-none h-5 w-5 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
-                <input x-ref="searchInput" x-model="search" type="text"  id="search-input" class="h-14 w-full border-0 bg-transparent pr-10 pl-3 text-gray-900 outline-none placeholder:text-gray-400 focus:ring-0 sm:text-sm dark:text-gray-100 dark:placeholder:text-gray-500" placeholder="Ketik kata kunci untuk mencari..." autocomplete="off" />
-                <button id="close-search-btn" @click="openSearch = false" class="cursor-pointer absolute right-4 text-lg text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">&times;</button>
+                <input x-ref="searchInput" x-model="search" type="text"  id="search-input" class="h-14 w-full border-0 bg-transparent pr-10 pl-3 text-zinc-900 outline-none placeholder:text-zinc-400 focus:ring-0 sm:text-sm dark:text-zinc-100 dark:placeholder:text-zinc-500" placeholder="Ketik kata kunci untuk mencari..." autocomplete="off" />
+                <button id="close-search-btn" @click="openSearch = false" class="cursor-pointer absolute right-4 text-lg text-zinc-400 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300">&times;</button>
             </div>
 
-            <div id="search-results" class="max-height-[350px] overflow-y-auto p-3 text-sm text-gray-700 dark:text-gray-300">
+            <div id="search-results" class="max-height-[350px] overflow-y-auto p-3 text-sm text-zinc-700 dark:text-zinc-300"
+            
+            >
                 <div class="space-y-1 block peer-placeholder-shown/input:hidden">
-                    <div class="px-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 dark:text-gray-500">Hasil Pencarian Terkait</div>
+                    <div class="px-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2 dark:text-zinc-500">Hasil Pencarian Terkait</div>
                     <template x-for="(item, index) in filteredItems" :key="index">
-                        <a :href="item.url" 
+                        <a :href="'/docs/1.x'+item.url" 
+                        :id="'search-'+index"
                         @mouseenter="activeIndex = index"
-                        class="block rounded-lg p-3 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500 transition-colors">
+                        @keydown.window.Enter.prevent="
+                        if(openSearch && activeIndex == index){
+                            window.location.assign('/docs/1.x'+item.url)
+                        }"
+                        :class="activeIndex == index ? 'bg-blue-600' : ''"
+                        class="block rounded-lg p-3 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-colors">
                         <div class="flex flex-col">
                             <span 
                                 class="text-xs font-semibold uppercase tracking-wider" 
@@ -198,24 +232,24 @@
                         </a>
                     </template>
                 </div>
-                <div class="py-14 text-center text-gray-400 dark:text-gray-500" x-show="filteredItems.length === 0">
-                    <svg class="mx-auto mb-2 h-6 w-6 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <div class="py-14 text-center text-zinc-400 dark:text-zinc-500" x-show="filteredItems.length === 0">
+                    <svg class="mx-auto mb-2 h-6 w-6 text-zinc-300 dark:text-zinc-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"></path>
                     </svg>
                     <p>Belum ada pencarian terbaru.</p>
                 </div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-4 bg-gray-50 px-4 py-2.5 text-xs text-gray-500 dark:bg-gray-800/50 dark:text-gray-400">
+            <div class="flex flex-wrap items-center gap-4 bg-zinc-50 px-4 py-2.5 text-xs text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
             <span class="flex items-center gap-1">
-                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↵</kbd> Pilih
+                <kbd class="rounded border border-zinc-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">↵</kbd> Pilih
             </span>
             <span class="flex items-center gap-1">
-                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↑</kbd>
-                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">↓</kbd> Navigasi
+                <kbd class="rounded border border-zinc-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">↑</kbd>
+                <kbd class="rounded border border-zinc-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">↓</kbd> Navigasi
             </span>
             <span class="flex items-center gap-1">
-                <kbd class="rounded border border-gray-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">esc</kbd> Tutup
+                <kbd class="rounded border border-zinc-200 bg-white px-1.5 py-0.5 shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">esc</kbd> Tutup
             </span>
             </div>
         </div>
@@ -241,7 +275,7 @@
                     @click="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
                     @keydown.window.ctrl.k.prevent="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
                     @keydown.window.cmd.k.prevent="openSearch = true; $nextTick(() => $refs.searchInput.focus())"
-                    class="hidden md:flex items-center gap-3 bg-slate-900/50 border border-slate-800 rounded-lg px-3 py-1.5 text-sm text-slate-500 w-64">
+                    class="hidden md:flex items-center gap-3 bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-1.5 text-sm text-zinc-500 w-64">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
@@ -429,7 +463,7 @@
                     link.classList.toggle('text-blue-600', isActive);
                     link.classList.toggle('border-l-2', isActive);
                     link.classList.toggle('border-blue-600', isActive);
-                    link.classList.toggle('text-gray-600', !isActive);
+                    link.classList.toggle('text-zinc-600', !isActive);
                 });
             }
 

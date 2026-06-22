@@ -38,6 +38,12 @@ class DocsNavigation
             'folder' => 'components',
             'page' => 'button',
         ],
+        'date-picker' => [
+            'title' => 'Date Picker',
+            'desc' => 'Date Picker klik',
+            'folder' => 'components',
+            'page' => 'date-picker',
+        ],
     ];
 
     public static function getNamePage(string $page, bool $next = false){

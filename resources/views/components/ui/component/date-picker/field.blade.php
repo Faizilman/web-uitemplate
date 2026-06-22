@@ -96,12 +96,12 @@ $variants = [
     ',
 
     'line' => '
-        bg-transparent
+        bg-white
         border-0
         border-b
         border-zinc-600
         rounded-none
-
+        dark:bg-[#010101]
         dark:border-zinc-800
     ',
 
@@ -247,11 +247,11 @@ $currentVariant = $variants[$variant] ?? $variants['solid'];
                 group
                 flex
                 items-center
-                min-h-10
+                
                 border
                 border-slate-200
-                px-3
-                py-2
+                px-2
+                py-1.5
                 shadow-sm
                 transition
 
@@ -278,6 +278,7 @@ $currentVariant = $variants[$variant] ?? $variants['solid'];
                     transition
                     placeholder:text-slate-400
                     dark:placeholder:text-slate-500
+                    text-sm
 
                     {{ trim($currentColor['text']) }}
                 "
@@ -303,7 +304,7 @@ $currentVariant = $variants[$variant] ?? $variants['solid'];
                     transition
                     placeholder:text-slate-400
                     dark:placeholder:text-slate-500
-
+                    text-sm
                     {{ trim($currentColor['text']) }}
                 "
             >
@@ -328,7 +329,7 @@ $currentVariant = $variants[$variant] ?? $variants['solid'];
                     transition
                     placeholder:text-slate-400
                     dark:placeholder:text-slate-500
-
+                    text-sm
                     {{ trim($currentColor['text']) }}
                 "
             >

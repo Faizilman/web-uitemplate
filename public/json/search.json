@@ -105,5 +105,255 @@
                 "url": "/components/button#api-reference"
             }
         ]
-    }
+    },
+    {
+    "slug": "according",
+    "title": "According",
+    "category": "Components",
+    "description": "Collapsible content component.",
+    "url": "/components/according",
+    "keywords": [
+        "according",
+        "accordion",
+        "collapse",
+        "expand"
+    ],
+    "sections": [
+        {
+            "type": "import",
+            "slug": "import",
+            "title": "Import",
+            "url": "/components/according#import"
+        },
+        {
+            "type": "basic-usage",
+            "slug": "basic-usage",
+            "title": "Basic Usage",
+            "url": "/components/according#basic-usage"
+        },
+        {
+            "type": "variants",
+            "slug": "variants",
+            "title": "Variants",
+            "url": "/components/according#variants",
+            "items": [
+                {
+                    "name": "default",
+                    "label": "Default",
+                    "description": "Standard accordion style."
+                },
+                {
+                    "name": "bordered",
+                    "label": "Bordered",
+                    "description": "Accordion with borders."
+                },
+                {
+                    "name": "separated",
+                    "label": "Separated",
+                    "description": "Each item separated by spacing."
+                }
+            ]
+        },
+        {
+            "type": "multiple-open",
+            "slug": "multiple-open",
+            "title": "Multiple Open",
+            "url": "/components/according#multiple-open"
+        },
+        {
+            "type": "icon-position",
+            "slug": "icon-position",
+            "title": "Icon Position",
+            "url": "/components/according#icon-position"
+        },
+        {
+            "type": "disabled",
+            "slug": "disabled",
+            "title": "Disabled",
+            "url": "/components/according#disabled"
+        },
+        {
+            "type": "api-reference",
+            "slug": "api-reference",
+            "title": "Api Reference",
+            "url": "/components/according#api-reference"
+        }
+    ]
+    },
+    {
+    "slug": "date-picker",
+    "title": "Date Picker",
+    "category": "Components",
+    "description": "Date selection component.",
+    "url": "/components/date-picker",
+    "keywords": [
+        "date",
+        "calendar",
+        "datepicker",
+        "input"
+    ],
+    "sections": [
+        {
+            "type": "import",
+            "slug": "import",
+            "title": "Import",
+            "url": "/components/date-picker#import"
+        },
+        {
+            "type": "basic-usage",
+            "slug": "basic-usage",
+            "title": "Basic Usage",
+            "url": "/components/date-picker#basic-usage"
+        },
+        {
+            "type": "variants",
+            "slug": "variants",
+            "title": "Variants",
+            "url": "/components/date-picker#variants",
+            "items": [
+                {
+                    "name": "default",
+                    "label": "Default",
+                    "description": "Default date picker."
+                },
+                {
+                    "name": "underlined",
+                    "label": "Underlined",
+                    "description": "Underline style field."
+                },
+                {
+                    "name": "filled",
+                    "label": "Filled",
+                    "description": "Filled background style."
+                }
+            ]
+        },
+        {
+            "type": "sizes",
+            "slug": "sizes",
+            "title": "Sizes",
+            "url": "/components/date-picker#sizes",
+            "items": [
+                {
+                    "name": "Small",
+                    "label": "sm",
+                    "description": "Small size."
+                },
+                {
+                    "name": "Medium",
+                    "label": "md",
+                    "description": "Medium size."
+                },
+                {
+                    "name": "Large",
+                    "label": "lg",
+                    "description": "Large size."
+                }
+            ]
+        },
+        {
+            "type": "range-picker",
+            "slug": "range-picker",
+            "title": "Range Picker",
+            "url": "/components/date-picker#range-picker"
+        },
+        {
+            "type": "disabled",
+            "slug": "disabled",
+            "title": "Disabled",
+            "url": "/components/date-picker#disabled"
+        },
+        {
+            "type": "readonly",
+            "slug": "readonly",
+            "title": "Readonly",
+            "url": "/components/date-picker#readonly"
+        },
+        {
+            "type": "api-reference",
+            "slug": "api-reference",
+            "title": "Api Reference",
+            "url": "/components/date-picker#api-reference"
+        }
+    ]
+},
+{
+    "slug": "alert",
+    "title": "Alert",
+    "category": "Components",
+    "description": "Feedback and status message component.",
+    "url": "/components/alert",
+    "keywords": [
+        "alert",
+        "notification",
+        "message",
+        "status"
+    ],
+    "sections": [
+        {
+            "type": "import",
+            "slug": "import",
+            "title": "Import",
+            "url": "/components/alert#import"
+        },
+        {
+            "type": "basic-usage",
+            "slug": "basic-usage",
+            "title": "Basic Usage",
+            "url": "/components/alert#basic-usage"
+        },
+        {
+            "type": "variants",
+            "slug": "variants",
+            "title": "Variants",
+            "url": "/components/alert#variants",
+            "items": [
+                {
+                    "name": "info",
+                    "label": "Info",
+                    "description": "Informational message."
+                },
+                {
+                    "name": "success",
+                    "label": "Success",
+                    "description": "Successful action message."
+                },
+                {
+                    "name": "warning",
+                    "label": "Warning",
+                    "description": "Warning message."
+                },
+                {
+                    "name": "danger",
+                    "label": "Danger",
+                    "description": "Error message."
+                }
+            ]
+        },
+        {
+            "type": "dismissible",
+            "slug": "dismissible",
+            "title": "Dismissible",
+            "url": "/components/alert#dismissible"
+        },
+        {
+            "type": "with-icon",
+            "slug": "with-icon",
+            "title": "With Icon",
+            "url": "/components/alert#with-icon"
+        },
+        {
+            "type": "with-title",
+            "slug": "with-title",
+            "title": "With Title",
+            "url": "/components/alert#with-title"
+        },
+        {
+            "type": "api-reference",
+            "slug": "api-reference",
+            "title": "Api Reference",
+            "url": "/components/alert#api-reference"
+        }
+    ]
+}
 ]
